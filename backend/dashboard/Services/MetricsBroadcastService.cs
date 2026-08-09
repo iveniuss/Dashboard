@@ -1,0 +1,21 @@
+﻿using dashboard.Hubs;
+using Microsoft.AspNetCore.SignalR;
+
+namespace dashboard.Services;
+
+public class MetricsBroadcastService(IHubContext<MetricsHub> hubContext, SystemMetricsCache cache) : BackgroundService
+{
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        using var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+        
+        while (await timer.WaitForNextTickAsync(stoppingToken))
+        {
+            var snapshot = cache.LastSnapshot;
+
+            await hubContext.Clients.All.SendAsync("MetricsUpdate", snapshot, stoppingToken);
+            
+            
+        }
+    }
+}

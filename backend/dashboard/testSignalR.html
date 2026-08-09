@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.0/dist/browser/signalr.min.js"></script>
+</head>
+<body>
+<pre id="output"></pre>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("http://localhost:8080/hubs/metrics")
+        .build();
+
+    connection.on("MetricsUpdate", (data) => {
+        document.getElementById("output").textContent =
+            JSON.stringify(data, null, 2);
+    });
+
+    connection.start().catch(err => console.error(err));
+</script>
+</body>
+</html>
