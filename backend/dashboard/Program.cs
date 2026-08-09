@@ -11,6 +11,7 @@ public class Program
         
         builder.Services.AddOpenApi();
         builder.Services.AddSingleton<ISystemMetricsProvider, SystemMetricsProvider>();
+        builder.Services.AddSingleton<SystemMetricsCache>();
         builder.Services.AddHostedService<TestService>();
 
         var app = builder.Build();

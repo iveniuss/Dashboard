@@ -1,22 +1,34 @@
+using dashboard.Models;
+
 namespace dashboard.Services;
 
-public class TestService(ILogger<TestService> logger, ISystemMetricsProvider metricsProvider): BackgroundService
+public class TestService(
+    ILogger<TestService> logger,
+    ISystemMetricsProvider metricsProvider,
+    SystemMetricsCache cache
+) : BackgroundService
 {
+    private readonly TimeSpan _refreshInterval = TimeSpan.FromSeconds(1);
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         logger.LogInformation("TestService started");
+        
+        using var timer = new PeriodicTimer(_refreshInterval);
 
-        while (!stoppingToken.IsCancellationRequested)
+        while (await timer.WaitForNextTickAsync(stoppingToken))
         {
             try
             {
                 var memInfo = await metricsProvider.GetMemUsageAsync();
-                Console.Clear();
-                Console.WriteLine($"Used {memInfo.Used}");
-                Console.WriteLine($"Used with cache {memInfo.UsedWithCache}");
-                Console.WriteLine($"Usage {memInfo.Usage}");
-                Console.WriteLine($"Swap usage {memInfo.SwapUsage}");
-                await Task.Delay(500, stoppingToken);
+                var cpuInfo = await metricsProvider.GetCpuUsageAsync();
+
+                cache.LastSnapshot = new MetricsSnapshot
+                {
+                    Timestamp = DateTime.UtcNow,
+                    Cpu = cpuInfo,
+                    Mem = memInfo
+                };
             }
             catch (Exception e)
             {
