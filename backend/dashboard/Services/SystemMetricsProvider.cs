@@ -58,4 +58,55 @@ public class SystemMetricsProvider : ISystemMetricsProvider
 
         return new CpuInfo { Usage = usagePercent };
     }
+
+    private async Task<MemStatSnapshot> GetMemStatSnapshotAsync()
+    {
+        var lines = await File.ReadAllLinesAsync("/proc/meminfo");
+        var snapshot = new MemStatSnapshot();
+
+        foreach (var line in lines)
+        {
+            var parts = line.Split(':', 2);
+            if (parts.Length != 2) continue;
+            var key = parts[0].Trim();
+            var value = parts[1].Trim().Split(' ')[0];
+
+            if (!long.TryParse(value, out var number))
+                continue;
+                
+            switch (key)
+            {
+                case "MemTotal":
+                    snapshot.Total = number;
+                    break;
+                case "MemFree":
+                    snapshot.Free = number;
+                    break;
+                case "MemAvailable":
+                    snapshot.Available = number;
+                    break;
+                case "Buffers":
+                    snapshot.Buffers = number;
+                    break;
+                case "Cached":
+                    snapshot.Cached = number;
+                    break;
+                case "SwapTotal":
+                    snapshot.SwapTotal = number;
+                    break;
+                case "SwapFree":
+                    snapshot.SwapFree = number;
+                    break;
+            }
+        }
+        
+        return snapshot;
+    }
+
+    public async Task<MemInfo> GetMemUsageAsync()
+    {
+        var snapshot = await GetMemStatSnapshotAsync();
+        
+        return MemInfo.FromSnapshot(snapshot);
+    }
 }

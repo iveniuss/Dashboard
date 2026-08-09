@@ -10,8 +10,12 @@ public class TestService(ILogger<TestService> logger, ISystemMetricsProvider met
         {
             try
             {
-                var usage = await metricsProvider.GetCpuUsageAsync();
-                Console.WriteLine(usage.Usage);
+                var memInfo = await metricsProvider.GetMemUsageAsync();
+                Console.Clear();
+                Console.WriteLine($"Used {memInfo.Used}");
+                Console.WriteLine($"Used with cache {memInfo.UsedWithCache}");
+                Console.WriteLine($"Usage {memInfo.Usage}");
+                Console.WriteLine($"Swap usage {memInfo.SwapUsage}");
                 await Task.Delay(500, stoppingToken);
             }
             catch (Exception e)
