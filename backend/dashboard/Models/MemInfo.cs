@@ -2,8 +2,12 @@
 
 public class MemInfo
 {
-    public long Total, Used, UsedWithCache, SwapTotal, SwapUsed;
-    
+    public long Total { get; init; }
+    public long Used { get; init; }
+    public long UsedWithCache { get; init; }
+    public long SwapTotal { get; init; }
+    public long SwapUsed { get; init; }
+
     public double Usage => (double)Used / Total;
     public double SwapUsage => (double)SwapUsed / SwapTotal;
 
