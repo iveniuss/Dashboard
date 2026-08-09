@@ -2,7 +2,4 @@
 
 namespace dashboard.Hubs;
 
-public class MetricsHub: Hub
-{
-    
-}
+public class MetricsHub: Hub;

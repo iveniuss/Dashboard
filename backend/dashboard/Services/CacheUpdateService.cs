@@ -2,8 +2,8 @@ using dashboard.Models;
 
 namespace dashboard.Services;
 
-public class TestService(
-    ILogger<TestService> logger,
+public class CacheUpdateService(
+    ILogger<CacheUpdateService> logger,
     ISystemMetricsProvider metricsProvider,
     SystemMetricsCache cache
 ) : BackgroundService

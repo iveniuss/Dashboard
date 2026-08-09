@@ -16,7 +16,7 @@ public class Program
         builder.Services.AddSignalR();
         builder.Services.AddSingleton<ISystemMetricsProvider, SystemMetricsProvider>();
         builder.Services.AddSingleton<SystemMetricsCache>();
-        builder.Services.AddHostedService<TestService>();
+        builder.Services.AddHostedService<CacheUpdateService>();
         builder.Services.AddHostedService<MetricsBroadcastService>();
 
         builder.Services.AddCors(options =>
