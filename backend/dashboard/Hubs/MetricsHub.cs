@@ -2,4 +2,10 @@
 
 namespace dashboard.Hubs;
 
-public class MetricsHub: Hub;
+public class MetricsHub(MetricsHubTracker tracker) : Hub
+{
+    public void Subscribe()
+    {
+        tracker.OnSubscribe();
+    }
+}

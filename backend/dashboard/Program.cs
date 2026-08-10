@@ -6,7 +6,6 @@ namespace dashboard;
 public class Program
 {
     
-    private const string LocalhostCorsPolicy = "AllowLocalhost";
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
@@ -18,22 +17,7 @@ public class Program
         builder.Services.AddSingleton<SystemMetricsCache>();
         builder.Services.AddHostedService<CacheUpdateService>();
         builder.Services.AddHostedService<MetricsBroadcastService>();
-
-        builder.Services.AddCors(options =>
-        {
-            options.AddPolicy(LocalhostCorsPolicy, policy =>
-            {
-                policy.SetIsOriginAllowed(origin =>
-                    {
-                        if (string.IsNullOrWhiteSpace(origin)) return false;
-                        if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri)) return false;
-                        return uri.Host is "localhost" or "127.0.0.1" or "[::1]";
-                    })
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
-            });
-        });
+        
         
         var app = builder.Build();
 
@@ -43,12 +27,16 @@ public class Program
             app.UseDeveloperExceptionPage();
             app.MapOpenApi();
             app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "dashboard v1"));
+            app.UseCors(policy => policy
+                .WithOrigins("http://localhost:5173")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
         }
 
         app.MapHub<MetricsHub>("/hubs/metrics");
 
         app.UseHttpsRedirection();
-        app.UseCors(LocalhostCorsPolicy);
 
         app.Run();
     }
