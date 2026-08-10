@@ -10,7 +10,9 @@ public class SystemMetricsProvider : ISystemMetricsProvider
     /// <summary>
     /// Get  raw CPU usage data from /proc/stat file
     /// </summary>
-    /// <returns></returns>
+    /// <returns>
+    /// <see cref="CpuStatSnapshot"/> object with parsed data
+    /// </returns>
     async Task<CpuStatSnapshot> GetCpuStatSnapshotAsync()
     {
         var lines = await File.ReadAllLinesAsync("/proc/stat");
@@ -37,7 +39,9 @@ public class SystemMetricsProvider : ISystemMetricsProvider
     /// <summary>
     /// Get CPU usage in percents
     /// </summary>
-    /// <returns></returns>
+    /// <returns>
+    /// <see cref="CpuInfo"/> object with parsed data
+    /// </returns>
     public async Task<CpuInfo> GetCpuUsageAsync()
     {
         var current = await GetCpuStatSnapshotAsync();
@@ -59,6 +63,12 @@ public class SystemMetricsProvider : ISystemMetricsProvider
         return new CpuInfo { Usage = usagePercent };
     }
 
+    /// <summary>
+    /// Parses raw memory usage data from /proc/meminfo file
+    /// </summary>
+    /// <returns>
+    /// <see cref="MemStatSnapshot"/> object with parsed data
+    /// </returns>
     private async Task<MemStatSnapshot> GetMemStatSnapshotAsync()
     {
         var lines = await File.ReadAllLinesAsync("/proc/meminfo");
@@ -103,6 +113,12 @@ public class SystemMetricsProvider : ISystemMetricsProvider
         return snapshot;
     }
 
+    /// <summary>
+    /// Get memory usage
+    /// </summary>
+    /// <returns>
+    /// <see cref="MemInfo"/> object with parsed data
+    /// </returns>
     public async Task<MemInfo> GetMemUsageAsync()
     {
         var snapshot = await GetMemStatSnapshotAsync();

@@ -1,7 +1,9 @@
 ﻿using dashboard.Models;
 
 namespace dashboard.Services;
-
+/// <summary>
+/// Stores metrics data
+/// </summary>
 public class SystemMetricsCache
 {
     private volatile MetricsSnapshot? _lastSnapshot;

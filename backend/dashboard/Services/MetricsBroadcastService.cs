@@ -2,7 +2,11 @@
 using Microsoft.AspNetCore.SignalR;
 
 namespace dashboard.Services;
-
+/// <summary>
+/// Background service that sends metrics to frontend
+/// </summary>
+/// <param name="hubContext"></param>
+/// <param name="cache"></param>
 public class MetricsBroadcastService(IHubContext<MetricsHub> hubContext, SystemMetricsCache cache) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)

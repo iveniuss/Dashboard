@@ -1,7 +1,12 @@
 using dashboard.Models;
 
 namespace dashboard.Services;
-
+/// <summary>
+/// Background service that updates cache class
+/// </summary>
+/// <param name="logger"></param>
+/// <param name="metricsProvider"></param>
+/// <param name="cache"></param>
 public class CacheUpdateService(
     ILogger<CacheUpdateService> logger,
     ISystemMetricsProvider metricsProvider,
