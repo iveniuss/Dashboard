@@ -8,9 +8,6 @@ public class MemInfo
     public long SwapTotal { get; init; }
     public long SwapUsed { get; init; }
 
-    public double Usage => (double)Used / Total;
-    public double SwapUsage => (double)SwapUsed / SwapTotal;
-
     public static MemInfo FromSnapshot(MemStatSnapshot snapshot)
     {
         return new MemInfo
