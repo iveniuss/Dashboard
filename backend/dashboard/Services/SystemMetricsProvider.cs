@@ -56,7 +56,7 @@ public class SystemMetricsProvider : ISystemMetricsProvider
         var totalDelta = current.Total - _lastSnapshot.Total;
         var idleDelta = current.IdleTotal - _lastSnapshot.IdleTotal;
         
-        var usagePercent = totalDelta == 0 ? 0 : (1.0 - (double)idleDelta / totalDelta) * 100;
+        var usagePercent = totalDelta == 0 ? 0 : Convert.ToInt32((1.0 - (double)idleDelta / totalDelta) * 100);
 
         _lastSnapshot = current;
 
