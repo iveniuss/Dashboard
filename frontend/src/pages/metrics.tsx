@@ -1,7 +1,7 @@
 import { useSignalR } from "@/shared/SignalRContext";
 import { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
-import { CpuWidget } from "@/widgets/CpuWidget/CpuWidget";
+import { CpuWidget } from "@/widgets/CpuWidget";
 import { Container } from "@chakra-ui/react";
 
 interface MetricSnapshot {

@@ -1,6 +1,6 @@
-import { SignalRProvider } from "../shared/SignalRContext.tsx"
-import MetricsPage from "../pages/metrics.tsx"
-import { Header } from "@/widgets/Header/Header.tsx";
+import { SignalRProvider } from "@/shared/SignalRContext"
+import MetricsPage from "@/pages/metrics"
+import { Header } from "@/widgets/Header";
 
 function App() {
 
