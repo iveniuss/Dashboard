@@ -15,7 +15,7 @@ export const CpuWidget = ({ usage }: CpuWidgetProps) => {
     <Box
       paddingX="1.5rem"
       paddingY="0.5rem"
-      bg={"gray.muted"}
+      bg={"bg.card"}
       w={"10rem"}
       h={"10rem"}
       position="relative"

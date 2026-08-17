@@ -9,13 +9,27 @@ import { progressCircleRecipe } from "@/shared/recipes/ProgressCircle.recipe";
 const config = defineConfig({
   globalCss: {
     body: {
-      bg: "bg.muted",
+      bg: "bg.main",
     },
   },
   theme: {
     slotRecipes: {
       progressCircle: progressCircleRecipe,
     },
+    semanticTokens:{
+      colors:{
+        "bg.main":{
+          value:{
+            base: "bg"
+          }
+        },
+        "bg.card":{
+          value:{
+            base: "bg.subtle"
+          }
+        }
+      }
+    }
   },
 });
 

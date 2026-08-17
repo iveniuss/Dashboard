@@ -19,7 +19,7 @@ export const MemoryWidget = (memInfo: MemoryWidgetProps) => {
     <Box
       paddingX="1.5rem"
       paddingY="0.5rem"
-      bg={"gray.muted"}
+      bg={"bg.card"}
       w={"22rem"}
       h={"10rem"}
       rounded="4xl"
