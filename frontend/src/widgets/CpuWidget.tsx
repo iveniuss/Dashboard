@@ -26,9 +26,8 @@ export const CpuWidget = ({ usage }: CpuWidgetProps) => {
         CPU Load
       </Text>
       <Center>
-        <ProgressCircle.Root value={usage} colorPalette="green">
+        <ProgressCircle.Root value={usage} colorPalette="green" size={"2xl"}>
           <ProgressCircle.Circle
-            css={{ "--size": "7rem", "--thickness": "0.75rem" }}
           >
             <ProgressCircle.Track />
             <ProgressCircle.Range strokeLinecap={"round"} />
