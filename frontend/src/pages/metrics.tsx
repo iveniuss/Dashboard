@@ -2,6 +2,7 @@ import { useSignalR } from "@/shared/SignalRContext";
 import { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
 import { CpuWidget } from "@/widgets/CpuWidget/CpuWidget";
+import { Container } from "@chakra-ui/react";
 
 interface MetricSnapshot {
   dateTime: string;
@@ -37,7 +38,13 @@ const MetricsPage = () => {
     return <div>Подключение...</div>;
   }
 
-  return <div>{metrics && <CpuWidget usage={metrics.cpu.usage} />}</div>;
+  return (
+    <>
+      <Container pt={"10"}>
+        {metrics && <CpuWidget usage={metrics.cpu.usage} />}
+      </Container>
+    </>
+  );
 };
 
 export default MetricsPage;
