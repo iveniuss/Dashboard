@@ -2,7 +2,8 @@ import { useSignalR } from "@/shared/SignalRContext";
 import { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
 import { CpuWidget } from "@/widgets/CpuWidget";
-import { Container } from "@chakra-ui/react";
+import { MemoryWidget } from "@/widgets/MemoryWidget";
+import { Container, Grid, GridItem } from "@chakra-ui/react";
 
 interface MetricSnapshot {
   dateTime: string;
@@ -41,7 +42,20 @@ const MetricsPage = () => {
   return (
     <>
       <Container pt={"10"}>
-        {metrics && <CpuWidget usage={metrics.cpu.usage} />}
+        {metrics && (
+          <Grid gap={"2rem"} templateColumns={"repeat(auto-fill, 10rem)"}>
+            <GridItem colSpan={1}>
+              <CpuWidget usage={metrics.cpu.usage} />
+            </GridItem>
+            <GridItem colSpan={2}>
+              <MemoryWidget
+                used={metrics.mem.used}
+                total={metrics.mem.total}
+                usedWithCache={metrics.mem.usedWithCache}
+              />
+            </GridItem>
+          </Grid>
+        )}
       </Container>
     </>
   );
