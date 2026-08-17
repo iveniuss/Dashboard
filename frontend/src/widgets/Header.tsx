@@ -1,13 +1,24 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { ColorModeButton } from "@/components/ui/color-mode";
+import { useEffect, useState } from "react";
 
 export const Header = () => {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0)
+    }
+    window.addEventListener('scroll', handleScroll, {passive: true})
+    return () => window.removeEventListener('scroll', handleScroll)
+  })
+
   return (
     <Box
-      bg={"bg/50"}
+      bg={"bg.main/50"}
       w={"full"}
       h={"5rem"}
-      shadow={"md"}
+      shadow={scrolled? "md" : "none"}
       display={"flex"}
       alignItems={"center"}
       justifyContent={"space-between"}
