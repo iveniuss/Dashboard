@@ -1,10 +1,11 @@
 import {
   AbsoluteCenter,
-  Box,
   Center,
   ProgressCircle,
   Text,
 } from "@chakra-ui/react";
+
+import { CardBox } from "@/components/ui/CardBox";
 
 interface CpuWidgetProps {
   usage: number;
@@ -12,15 +13,10 @@ interface CpuWidgetProps {
 
 export const CpuWidget = ({ usage }: CpuWidgetProps) => {
   return (
-    <Box
-      paddingX="1.5rem"
-      paddingY="0.5rem"
-      bg={"bg.card"}
+    <CardBox
       w={"10rem"}
       h={"10rem"}
       position="relative"
-      rounded="4xl"
-      boxShadow="md"
     >
       <Text textStyle={"md"} fontWeight={"bold"}>
         CPU Load
@@ -42,6 +38,6 @@ export const CpuWidget = ({ usage }: CpuWidgetProps) => {
           </AbsoluteCenter>
         </ProgressCircle.Root>
       </Center>
-    </Box>
+    </CardBox>
   );
 };
