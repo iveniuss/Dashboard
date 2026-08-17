@@ -83,6 +83,8 @@ public class SystemMetricsProvider : ISystemMetricsProvider
 
             if (!long.TryParse(value, out var number))
                 continue;
+            
+            number *= 1024;
                 
             switch (key)
             {
