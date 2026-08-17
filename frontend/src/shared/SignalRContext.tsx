@@ -1,4 +1,11 @@
-import { createContext, type ReactNode, useContext, useEffect, useRef, useState } from "react"
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import * as signalR from "@microsoft/signalr";
 
 interface SignalRContextValue {
@@ -14,7 +21,7 @@ const SignalRContext = createContext<SignalRContextValue>({
 export function SignalRProvider({ children }: { children: ReactNode }) {
   const connectionRef = useRef<signalR.HubConnection | null>(null);
   const [connectionState, setConnectionState] = useState(
-    signalR.HubConnectionState.Disconnected
+    signalR.HubConnectionState.Disconnected,
   );
 
   useEffect(() => {
@@ -24,9 +31,15 @@ export function SignalRProvider({ children }: { children: ReactNode }) {
       .configureLogging(signalR.LogLevel.Information)
       .build();
 
-    connection.onreconnecting(() => setConnectionState(signalR.HubConnectionState.Reconnecting));
-    connection.onreconnected(() => setConnectionState(signalR.HubConnectionState.Connected));
-    connection.onclose(() => setConnectionState(signalR.HubConnectionState.Disconnected));
+    connection.onreconnecting(() =>
+      setConnectionState(signalR.HubConnectionState.Reconnecting),
+    );
+    connection.onreconnected(() =>
+      setConnectionState(signalR.HubConnectionState.Connected),
+    );
+    connection.onclose(() =>
+      setConnectionState(signalR.HubConnectionState.Disconnected),
+    );
 
     connection
       .start()
@@ -41,7 +54,9 @@ export function SignalRProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <SignalRContext.Provider value={{ connection: connectionRef.current, connectionState }}>
+    <SignalRContext.Provider
+      value={{ connection: connectionRef.current, connectionState }}
+    >
       {children}
     </SignalRContext.Provider>
   );

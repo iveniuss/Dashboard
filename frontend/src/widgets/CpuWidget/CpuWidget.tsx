@@ -1,4 +1,10 @@
-import { AbsoluteCenter, Box, ProgressCircle, Text } from "@chakra-ui/react";
+import {
+  AbsoluteCenter,
+  Box,
+  Center,
+  ProgressCircle,
+  Text,
+} from "@chakra-ui/react";
 
 interface CpuWidgetProps {
   usage: number;
@@ -7,7 +13,8 @@ interface CpuWidgetProps {
 export const CpuWidget = ({ usage }: CpuWidgetProps) => {
   return (
     <Box
-      p="1rem"
+      paddingX="1.5rem"
+      paddingY="0.5rem"
       bg={"gray.muted"}
       w={"10rem"}
       h={"10rem"}
@@ -15,20 +22,27 @@ export const CpuWidget = ({ usage }: CpuWidgetProps) => {
       rounded="4xl"
       boxShadow="md"
     >
-      <ProgressCircle.Root value={usage} colorPalette="green">
-        <ProgressCircle.Circle
-          css={{ "--size": "8rem", "--thickness": "0.75rem" }}
-        >
-          <ProgressCircle.Track />
-          <ProgressCircle.Range strokeLinecap={"round"} />
-        </ProgressCircle.Circle>
-        <AbsoluteCenter>
-          <Text textStyle={"2xl"} fontWeight={"bold"}>
-            {usage}
-            <Text textStyle={"sm"} verticalAlign={"baseline"} as={"span"}>%</Text>
-          </Text>
-        </AbsoluteCenter>
-      </ProgressCircle.Root>
+      <Text textStyle={"md"} fontWeight={"bold"}>
+        CPU Load
+      </Text>
+      <Center>
+        <ProgressCircle.Root value={usage} colorPalette="green">
+          <ProgressCircle.Circle
+            css={{ "--size": "7rem", "--thickness": "0.75rem" }}
+          >
+            <ProgressCircle.Track />
+            <ProgressCircle.Range strokeLinecap={"round"} />
+          </ProgressCircle.Circle>
+          <AbsoluteCenter>
+            <Text textStyle={"2xl"} fontWeight={"bold"}>
+              {usage}
+              <Text textStyle={"sm"} verticalAlign={"baseline"} as={"span"}>
+                %
+              </Text>
+            </Text>
+          </AbsoluteCenter>
+        </ProgressCircle.Root>
+      </Center>
     </Box>
   );
 };
