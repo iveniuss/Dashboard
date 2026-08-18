@@ -7,7 +7,7 @@ import {
   DataList,
   FormatByte,
 } from "@chakra-ui/react";
-import { CardBox } from "@/components/ui/CardBox";
+import { WidgetBox } from "@/components/ui/WidgetBox";
 
 interface MemoryWidgetProps {
   total: number;
@@ -17,9 +17,8 @@ interface MemoryWidgetProps {
 
 export const MemoryWidget = (memInfo: MemoryWidgetProps) => {
   return (
-    <CardBox
-      w={"22rem"}
-      h={"10rem"}
+    <WidgetBox
+      cells={[2, 1]}
     >
       <Text textStyle={"md"} fontWeight={"bold"}>
         Memory Load
@@ -91,6 +90,6 @@ export const MemoryWidget = (memInfo: MemoryWidgetProps) => {
           </ProgressCircle.Root>
         </Box>
       </Flex>
-    </CardBox>
+    </WidgetBox>
   );
 };

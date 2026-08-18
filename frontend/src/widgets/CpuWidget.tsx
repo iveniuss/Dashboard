@@ -5,7 +5,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { CardBox } from "@/components/ui/CardBox";
+import { WidgetBox } from "@/components/ui/WidgetBox";
 
 interface CpuWidgetProps {
   usage: number;
@@ -13,9 +13,8 @@ interface CpuWidgetProps {
 
 export const CpuWidget = ({ usage }: CpuWidgetProps) => {
   return (
-    <CardBox
-      w={"10rem"}
-      h={"10rem"}
+    <WidgetBox
+      cells={[1, 1]}
       position="relative"
     >
       <Text textStyle={"md"} fontWeight={"bold"}>
@@ -38,6 +37,6 @@ export const CpuWidget = ({ usage }: CpuWidgetProps) => {
           </AbsoluteCenter>
         </ProgressCircle.Root>
       </Center>
-    </CardBox>
+    </WidgetBox>
   );
 };
