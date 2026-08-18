@@ -19,10 +19,8 @@ export const MemoryWidget = (memInfo: MemoryWidgetProps) => {
   return (
     <WidgetBox
       cells={[2, 1]}
+      title={"Memory Load"}
     >
-      <Text textStyle={"md"} fontWeight={"bold"}>
-        Memory Load
-      </Text>
       <Flex
         position="relative"
         justifyContent={"space-between"}

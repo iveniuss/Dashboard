@@ -1,10 +1,16 @@
-import { Box, type BoxProps } from "@chakra-ui/react";
+import { Box, type BoxProps, Text } from "@chakra-ui/react";
 
 interface CardBoxProps extends BoxProps {
-  cells?: [number, number]
+  cells?: [number, number];
+  title?: string;
 }
 
-export const WidgetBox = ({ children, cells, ...rest }: CardBoxProps) => {
+export const WidgetBox = ({
+  children,
+  cells,
+  title,
+  ...rest
+}: CardBoxProps) => {
   return (
     <Box
       paddingX="1.5rem"
@@ -16,6 +22,7 @@ export const WidgetBox = ({ children, cells, ...rest }: CardBoxProps) => {
       h={cells ? `${cells[1] * 10 + (cells[1] - 1) * 2}rem` : ""}
       {...rest}
     >
+      {title && <Text textStyle={"md"} fontWeight={"bold"}>{title}</Text>}
       {children}
     </Box>
   );

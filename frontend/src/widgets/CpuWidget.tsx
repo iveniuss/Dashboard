@@ -16,10 +16,8 @@ export const CpuWidget = ({ usage }: CpuWidgetProps) => {
     <WidgetBox
       cells={[1, 1]}
       position="relative"
+      title={"CPU Load"}
     >
-      <Text textStyle={"md"} fontWeight={"bold"}>
-        CPU Load
-      </Text>
       <Center>
         <ProgressCircle.Root value={usage} colorPalette="green" size={"2xl"}>
           <ProgressCircle.Circle
