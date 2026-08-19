@@ -52,6 +52,7 @@ const MetricsPage = () => {
                 used={metrics.mem.used}
                 total={metrics.mem.total}
                 usedWithCache={metrics.mem.usedWithCache}
+                swapUsed={metrics.mem.swapUsed}
               />
             </GridItem>
           </Grid>
