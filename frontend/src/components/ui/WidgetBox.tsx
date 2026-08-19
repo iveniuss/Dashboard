@@ -17,7 +17,7 @@ export const WidgetBox = ({
       paddingY="0.5rem"
       bg={"bg.card"}
       rounded="4xl"
-      boxShadow="md"
+      boxShadow="lg"
       w={cells ? `${cells[0] * 10 + (cells[0] - 1) * 2}rem` : ""}
       h={cells ? `${cells[1] * 10 + (cells[1] - 1) * 2}rem` : ""}
       {...rest}

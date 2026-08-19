@@ -1,11 +1,9 @@
 import {
-  AbsoluteCenter,
-  Center,
-  ProgressCircle,
-  Text,
+  Center
 } from "@chakra-ui/react";
 
 import { WidgetBox } from "@/components/ui/WidgetBox";
+import { CpuCircle } from "@/widgets/CpuCircle";
 
 interface CpuWidgetProps {
   usage: number;
@@ -19,21 +17,7 @@ export const CpuWidget = ({ usage }: CpuWidgetProps) => {
       title={"CPU Load"}
     >
       <Center>
-        <ProgressCircle.Root value={usage} colorPalette="green" size={"2xl"}>
-          <ProgressCircle.Circle
-          >
-            <ProgressCircle.Track />
-            <ProgressCircle.Range strokeLinecap={"round"} />
-          </ProgressCircle.Circle>
-          <AbsoluteCenter>
-            <Text textStyle={"2xl"} fontWeight={"bold"}>
-              {usage}
-              <Text textStyle={"sm"} verticalAlign={"baseline"} as={"span"}>
-                %
-              </Text>
-            </Text>
-          </AbsoluteCenter>
-        </ProgressCircle.Root>
+        <CpuCircle usage={usage} />
       </Center>
     </WidgetBox>
   );
