@@ -14,7 +14,7 @@ interface MemoryWidgetProps {
   swapUsed: number;
 }
 
-export const MemoryWidget = (memInfo: MemoryWidgetProps) => {
+export const MemoryWidgetMd = (memInfo: MemoryWidgetProps) => {
   return (
     <WidgetBox cells={[2, 1]} title={"Memory Load"}>
       <Flex

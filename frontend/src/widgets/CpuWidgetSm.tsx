@@ -9,7 +9,7 @@ interface CpuWidgetProps {
   usage: number;
 }
 
-export const CpuWidget = ({ usage }: CpuWidgetProps) => {
+export const CpuWidgetSm = ({ usage }: CpuWidgetProps) => {
   return (
     <WidgetBox
       cells={[1, 1]}

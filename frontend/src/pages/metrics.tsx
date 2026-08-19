@@ -1,8 +1,9 @@
 import { useSignalR } from "@/shared/SignalRContext";
 import { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
-import { CpuWidget } from "@/widgets/CpuWidget";
-import { MemoryWidget } from "@/widgets/MemoryWidget";
+import { CpuWidgetSm } from "@/widgets/CpuWidgetSm";
+import { MemoryWidgetMd } from "@/widgets/MemoryWidgetMd";
+import { MemoryWidgetSm } from "@/widgets/MemoryWidgetSm";
 import { Container, Grid, GridItem } from "@chakra-ui/react";
 
 interface MetricSnapshot {
@@ -21,7 +22,7 @@ interface MetricSnapshot {
 
 const MetricsPage = () => {
   const { connection, connectionState } = useSignalR();
-  const [metrics, setMetrics] = useState<any>(null);
+  const [metrics, setMetrics] = useState<MetricSnapshot | null>(null);
 
   useEffect(() => {
     if (!connection) return;
@@ -45,10 +46,17 @@ const MetricsPage = () => {
         {metrics && (
           <Grid gap={"2rem"} templateColumns={"repeat(auto-fill, 10rem)"}>
             <GridItem colSpan={1}>
-              <CpuWidget usage={metrics.cpu.usage} />
+              <CpuWidgetSm usage={metrics.cpu.usage} />
+            </GridItem>
+            <GridItem>
+              <MemoryWidgetSm
+                total={metrics.mem.total}
+                used={metrics.mem.used}
+                usedWithCache={metrics.mem.usedWithCache}
+              />
             </GridItem>
             <GridItem colSpan={2}>
-              <MemoryWidget
+              <MemoryWidgetMd
                 used={metrics.mem.used}
                 total={metrics.mem.total}
                 usedWithCache={metrics.mem.usedWithCache}
