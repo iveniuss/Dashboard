@@ -27,12 +27,14 @@ public class CacheUpdateService(
             {
                 var memInfo = await metricsProvider.GetMemUsageAsync();
                 var cpuInfo = await metricsProvider.GetCpuUsageAsync();
+                var diskInfo = metricsProvider.GetDiskUsage();
 
                 cache.LastSnapshot = new MetricsSnapshot
                 {
                     Timestamp = DateTime.UtcNow,
                     Cpu = cpuInfo,
-                    Mem = memInfo
+                    Mem = memInfo,
+                    Disks = diskInfo
                 };
             }
             catch (Exception e)

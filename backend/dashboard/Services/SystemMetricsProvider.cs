@@ -1,3 +1,4 @@
+using dashboard.DTOs;
 using dashboard.Models;
 
 namespace dashboard.Services;
@@ -126,5 +127,20 @@ public class SystemMetricsProvider : ISystemMetricsProvider
         var snapshot = await GetMemStatSnapshotAsync();
         
         return MemInfo.FromSnapshot(snapshot);
+    }
+
+    public List<DiskInfo> GetDiskUsage()
+    {
+        DriveInfo[] allDrives = DriveInfo.GetDrives();
+        var result = new List<DiskInfo>();
+
+        foreach (var drive in allDrives)
+        {
+            if (drive.IsReady && drive.DriveType == DriveType.Fixed)
+                result.Add(new DiskInfo(drive.Name, drive.TotalSize, drive.TotalFreeSpace));
+                
+        }
+
+        return result;
     }
 }
