@@ -6,6 +6,7 @@ import { MemoryWidgetMd } from "@/widgets/MemoryWidgetMd";
 import { MemoryWidgetSm } from "@/widgets/MemoryWidgetSm";
 import { Container, Grid, GridItem } from "@chakra-ui/react";
 import { CodeWidget } from "@/widgets/CodeWidget";
+import { StorageWidgetSm } from "@/widgets/StorageWidgetSm";
 
 interface MetricSnapshot {
   dateTime: string;
@@ -70,6 +71,9 @@ const MetricsPage = () => {
                 usedWithCache={metrics.mem.usedWithCache}
                 swapUsed={metrics.mem.swapUsed}
               />
+            </GridItem>
+            <GridItem>
+              <StorageWidgetSm total={metrics.disks[0].total} free={metrics.disks[0].free}/>
             </GridItem>
             <GridItem colSpan={3} rowSpan={2}>
               <CodeWidget code={JSON.stringify(metrics, null, 2)}/>
