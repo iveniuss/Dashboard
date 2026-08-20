@@ -5,7 +5,7 @@ import {
   FormatByte,
 } from "@chakra-ui/react";
 import { WidgetBox } from "@/components/ui/WidgetBox";
-import { MemoryCircle } from "@/widgets/MemoryCircle";
+import { MemoryCircle } from "@/widgets/Memory/MemoryCircle";
 
 interface MemoryWidgetProps {
   total: number;

@@ -1,5 +1,5 @@
 import { WidgetBox } from "@/components/ui/WidgetBox";
-import { StorageCirce } from "@/widgets/StorageCirce";
+import { StorageCirce } from "@/widgets/Storage/StorageCirce";
 
 interface IProps {
   total: number;

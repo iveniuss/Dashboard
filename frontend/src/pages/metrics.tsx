@@ -1,12 +1,12 @@
 import { useSignalR } from "@/shared/SignalRContext";
 import { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
-import { CpuWidgetSm } from "@/widgets/CpuWidgetSm";
-import { MemoryWidgetMd } from "@/widgets/MemoryWidgetMd";
-import { MemoryWidgetSm } from "@/widgets/MemoryWidgetSm";
+import { CpuWidgetSm } from "@/widgets/Cpu/CpuWidgetSm";
+import { MemoryWidgetMd } from "@/widgets/Memory/MemoryWidgetMd";
+import { MemoryWidgetSm } from "@/widgets/Memory/MemoryWidgetSm";
 import { Container, Grid, GridItem } from "@chakra-ui/react";
 import { CodeWidget } from "@/widgets/CodeWidget";
-import { StorageWidgetSm } from "@/widgets/StorageWidgetSm";
+import { StorageWidgetSm } from "@/widgets/Storage/StorageWidgetSm";
 
 interface MetricSnapshot {
   dateTime: string;

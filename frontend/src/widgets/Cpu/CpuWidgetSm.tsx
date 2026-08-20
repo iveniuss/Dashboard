@@ -3,7 +3,7 @@ import {
 } from "@chakra-ui/react";
 
 import { WidgetBox } from "@/components/ui/WidgetBox";
-import { CpuCircle } from "@/widgets/CpuCircle";
+import { CpuCircle } from "@/widgets/Cpu/CpuCircle";
 
 interface CpuWidgetProps {
   usage: number;

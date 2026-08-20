@@ -1,5 +1,5 @@
 import { WidgetBox } from "@/components/ui/WidgetBox";
-import { MemoryCircle } from "@/widgets/MemoryCircle";
+import { MemoryCircle } from "@/widgets/Memory/MemoryCircle";
 
 interface IProps{
   total: number;
