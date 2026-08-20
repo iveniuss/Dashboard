@@ -5,6 +5,7 @@ import { CpuWidgetSm } from "@/widgets/CpuWidgetSm";
 import { MemoryWidgetMd } from "@/widgets/MemoryWidgetMd";
 import { MemoryWidgetSm } from "@/widgets/MemoryWidgetSm";
 import { Container, Grid, GridItem } from "@chakra-ui/react";
+import { CodeWidget } from "@/widgets/CodeWidget";
 
 interface MetricSnapshot {
   dateTime: string;
@@ -18,6 +19,13 @@ interface MetricSnapshot {
     swapTotal: number;
     swapUsed: number;
   };
+  disks: [
+    {
+      name: string;
+      total: number;
+      free: number;
+    }
+  ]
 }
 
 const MetricsPage = () => {
@@ -62,6 +70,9 @@ const MetricsPage = () => {
                 usedWithCache={metrics.mem.usedWithCache}
                 swapUsed={metrics.mem.swapUsed}
               />
+            </GridItem>
+            <GridItem colSpan={3} rowSpan={2}>
+              <CodeWidget code={JSON.stringify(metrics, null, 2)}/>
             </GridItem>
           </Grid>
         )}
