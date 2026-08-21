@@ -1,4 +1,4 @@
-﻿using dashboard.Models;
+﻿using dashboard.DTOs;
 
 namespace dashboard.Services;
 /// <summary>

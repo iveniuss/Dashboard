@@ -1,4 +1,4 @@
-using dashboard.Models;
+using dashboard.DTOs;
 
 namespace dashboard.Services;
 /// <summary>
@@ -30,12 +30,12 @@ public class CacheUpdateService(
                 var diskInfo = metricsProvider.GetDiskUsage();
 
                 cache.LastSnapshot = new MetricsSnapshot
-                {
-                    Timestamp = DateTime.UtcNow,
-                    Cpu = cpuInfo,
-                    Mem = memInfo,
-                    Disks = diskInfo
-                };
+                (
+                    DateTime.UtcNow,
+                    cpuInfo,
+                    memInfo,
+                    diskInfo
+                );
             }
             catch (Exception e)
             {

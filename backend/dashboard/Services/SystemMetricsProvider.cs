@@ -5,7 +5,6 @@ namespace dashboard.Services;
 
 public class SystemMetricsProvider : ISystemMetricsProvider
 {
-    
     private CpuStatSnapshot? _lastSnapshot;
 
     /// <summary>
@@ -18,12 +17,12 @@ public class SystemMetricsProvider : ISystemMetricsProvider
     {
         var lines = await File.ReadAllLinesAsync("/proc/stat");
         var cpuLine = lines.First(l => l.StartsWith("cpu "));
-        
+
         var parts = cpuLine.Split(' ', StringSplitOptions.RemoveEmptyEntries)
             .Skip(1)
             .Select(long.Parse)
             .ToArray();
-        
+
         return new CpuStatSnapshot
         {
             User = parts[0],
@@ -53,15 +52,15 @@ public class SystemMetricsProvider : ISystemMetricsProvider
             await Task.Delay(200);
             current = await GetCpuStatSnapshotAsync();
         }
-        
+
         var totalDelta = current.Total - _lastSnapshot.Total;
         var idleDelta = current.IdleTotal - _lastSnapshot.IdleTotal;
-        
+
         var usagePercent = totalDelta == 0 ? 0 : Convert.ToInt32((1.0 - (double)idleDelta / totalDelta) * 100);
 
         _lastSnapshot = current;
 
-        return new CpuInfo { Usage = usagePercent };
+        return new CpuInfo(usagePercent);
     }
 
     /// <summary>
@@ -84,9 +83,9 @@ public class SystemMetricsProvider : ISystemMetricsProvider
 
             if (!long.TryParse(value, out var number))
                 continue;
-            
+
             number *= 1024;
-                
+
             switch (key)
             {
                 case "MemTotal":
@@ -112,7 +111,7 @@ public class SystemMetricsProvider : ISystemMetricsProvider
                     break;
             }
         }
-        
+
         return snapshot;
     }
 
@@ -125,7 +124,7 @@ public class SystemMetricsProvider : ISystemMetricsProvider
     public async Task<MemInfo> GetMemUsageAsync()
     {
         var snapshot = await GetMemStatSnapshotAsync();
-        
+
         return MemInfo.FromSnapshot(snapshot);
     }
 
@@ -138,7 +137,6 @@ public class SystemMetricsProvider : ISystemMetricsProvider
         {
             if (drive.IsReady && drive.DriveType == DriveType.Fixed)
                 result.Add(new DiskInfo(drive.Name, drive.TotalSize, drive.TotalFreeSpace));
-                
         }
 
         return result;
