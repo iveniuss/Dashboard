@@ -1,6 +1,7 @@
 using dashboard.DTOs;
 
 namespace dashboard.Services;
+
 /// <summary>
 /// Background service that updates cache class
 /// </summary>
@@ -15,11 +16,15 @@ public class CacheUpdateService(
 {
     private readonly TimeSpan _refreshInterval = TimeSpan.FromSeconds(1);
 
+    private readonly int
+        _longTimeCacheFrequency = 60; // how many refresh intervals to wait before updating longtime cache
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         logger.LogInformation("TestService started");
-        
+
         using var timer = new PeriodicTimer(_refreshInterval);
+        int intervalCounter = 0;
 
         while (await timer.WaitForNextTickAsync(stoppingToken))
         {
@@ -36,6 +41,14 @@ public class CacheUpdateService(
                     memInfo,
                     diskInfo
                 );
+
+                if (intervalCounter == 0)
+                {
+                    cache.UpdateLongTimeCache(cache.LastSnapshot);
+                    intervalCounter = _longTimeCacheFrequency;
+                }
+                
+                intervalCounter--;
             }
             catch (Exception e)
             {

@@ -20,6 +20,7 @@ public class Program
         builder.Services.AddHostedService<CacheUpdateService>();
         builder.Services.AddHostedService<MetricsBroadcastService>();
         builder.Services.AddSingleton<MetricsHubTracker>();
+        builder.Services.AddHostedService<MetricsHistoryBroadcastService>();
         
         
         var app = builder.Build();

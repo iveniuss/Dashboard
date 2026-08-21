@@ -32,17 +32,22 @@ interface MetricSnapshot {
 const MetricsPage = () => {
   const { connection, connectionState } = useSignalR();
   const [metrics, setMetrics] = useState<MetricSnapshot | null>(null);
+  const [history, setHistory] = useState<MetricSnapshot[]>([]);
 
   useEffect(() => {
     if (!connection) return;
 
-    const handler = (data: MetricSnapshot) => {
+    const metricsHandler = (data: MetricSnapshot) => {
       setMetrics(data);
-      console.log(data);
     };
-    connection.on("UpdateMetrics", handler);
+    connection.on("UpdateMetrics", metricsHandler);
 
-    return () => connection.off("UpdateMetrics", handler);
+    const historyHandler = (data: MetricSnapshot[]) => {
+      setHistory(data);
+    }
+    connection.on("UpdateHistory", historyHandler);
+
+    return () => connection.off("UpdateMetrics", metricsHandler);
   }, [connection]);
 
   if (connectionState !== signalR.HubConnectionState.Connected) {
@@ -76,7 +81,7 @@ const MetricsPage = () => {
               <StorageWidgetSm total={metrics.disks[0].total} free={metrics.disks[0].free}/>
             </GridItem>
             <GridItem colSpan={3} rowSpan={2}>
-              <CodeWidget code={JSON.stringify(metrics, null, 2)}/>
+              <CodeWidget code={JSON.stringify(history, null, 2)}/>
             </GridItem>
           </Grid>
         )}
