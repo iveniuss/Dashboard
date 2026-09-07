@@ -19,10 +19,10 @@ export const StorageCirce = ({total, used}: IProps) => {
           alignItems={"center"}
         >
           <Text textStyle={"lg"} fontWeight={"bold"} textWrap={"nowrap"}>
-            <FormatByte value={used} unitDisplay={"narrow"} />
+            <FormatByte value={used} unitDisplay={"narrow"} unitSystem={"binary"} />
           </Text>
           <Text textStyle={"xs"} color={"gray.400"}>
-            /<FormatByte value={total} unitDisplay={"narrow"} />
+            /<FormatByte value={total} unitDisplay={"narrow"} unitSystem={"binary"} />
           </Text>
         </ProgressCircle.Label>
       </AbsoluteCenter>

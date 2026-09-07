@@ -1,9 +1,4 @@
-import {
-  Box,
-  Flex,
-  DataList,
-  FormatByte,
-} from "@chakra-ui/react";
+import { Box, Flex, DataList, FormatByte } from "@chakra-ui/react";
 import { WidgetBox } from "@/components/ui/WidgetBox";
 import { MemoryCircle } from "@/widgets/Memory/MemoryCircle";
 
@@ -27,25 +22,28 @@ export const MemoryWidgetMd = (memInfo: MemoryWidgetProps) => {
             <DataList.Item>
               <DataList.ItemLabel minW="5rem">Total</DataList.ItemLabel>
               <DataList.ItemValue>
-                <FormatByte value={memInfo.total} />
+                <FormatByte value={memInfo.total} unitSystem={"binary"} />
               </DataList.ItemValue>
             </DataList.Item>
             <DataList.Item>
               <DataList.ItemLabel minW="5rem">Used</DataList.ItemLabel>
               <DataList.ItemValue>
-                <FormatByte value={memInfo.used} />
+                <FormatByte value={memInfo.used} unitSystem={"binary"} />
               </DataList.ItemValue>
             </DataList.Item>
             <DataList.Item>
               <DataList.ItemLabel minW="5rem">Cached</DataList.ItemLabel>
               <DataList.ItemValue>
-                <FormatByte value={memInfo.usedWithCache - memInfo.used} />
+                <FormatByte
+                  value={memInfo.usedWithCache - memInfo.used}
+                  unitSystem={"binary"}
+                />
               </DataList.ItemValue>
             </DataList.Item>
             <DataList.Item>
               <DataList.ItemLabel minW="5rem">Swap</DataList.ItemLabel>
               <DataList.ItemValue>
-                <FormatByte value={memInfo.swapUsed} />
+                <FormatByte value={memInfo.swapUsed} unitSystem={"binary"} />
               </DataList.ItemValue>
             </DataList.Item>
           </DataList.Root>
