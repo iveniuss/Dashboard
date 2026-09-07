@@ -65,6 +65,9 @@ const MetricsPage = () => {
             <GridItem colSpan={3} rowSpan={2}>
               <CodeWidget code={JSON.stringify(history, null, 2)}/>
             </GridItem>
+            <GridItem colSpan={3} rowSpan={2}>
+              <MemoryChartWidget metricsHistory={history}/>
+            </GridItem>
           </Grid>
         )}
       </Container>
