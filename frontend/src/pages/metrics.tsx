@@ -7,42 +7,24 @@ import { MemoryWidgetSm } from "@/widgets/Memory/MemoryWidgetSm";
 import { Container, Grid, GridItem } from "@chakra-ui/react";
 import { CodeWidget } from "@/widgets/CodeWidget";
 import { StorageWidgetSm } from "@/widgets/Storage/StorageWidgetSm";
+import { type IMetrics} from "@/shared/types";
+import { MemoryChartWidget } from "@/widgets/Memory/MemoryChartWidget";
 
-interface MetricSnapshot {
-  dateTime: string;
-  cpu: {
-    usage: number;
-  };
-  mem: {
-    total: number;
-    used: number;
-    usedWithCache: number;
-    swapTotal: number;
-    swapUsed: number;
-  };
-  disks: [
-    {
-      name: string;
-      total: number;
-      free: number;
-    }
-  ]
-}
 
 const MetricsPage = () => {
   const { connection, connectionState } = useSignalR();
-  const [metrics, setMetrics] = useState<MetricSnapshot | null>(null);
-  const [history, setHistory] = useState<MetricSnapshot[]>([]);
+  const [metrics, setMetrics] = useState<IMetrics | null>(null);
+  const [history, setHistory] = useState<IMetrics[]>([]);
 
   useEffect(() => {
     if (!connection) return;
 
-    const metricsHandler = (data: MetricSnapshot) => {
+    const metricsHandler = (data: IMetrics) => {
       setMetrics(data);
     };
     connection.on("UpdateMetrics", metricsHandler);
 
-    const historyHandler = (data: MetricSnapshot[]) => {
+    const historyHandler = (data: IMetrics[]) => {
       setHistory(data);
     }
     connection.on("UpdateHistory", historyHandler);
