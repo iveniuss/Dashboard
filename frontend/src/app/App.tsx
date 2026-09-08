@@ -1,5 +1,5 @@
 import { SignalRProvider } from "@/shared/SignalRContext"
-import MetricsPage from "@/pages/metrics"
+import MetricsPage from "@/widgets/MetricsGrid"
 import { Header } from "@/widgets/Header";
 
 function App() {

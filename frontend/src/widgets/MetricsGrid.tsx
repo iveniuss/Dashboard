@@ -11,7 +11,7 @@ import { type IMetrics} from "@/shared/types";
 import { MemoryChartWidget } from "@/widgets/Memory/MemoryChartWidget";
 
 
-const MetricsPage = () => {
+const MetricsGrid = () => {
   const { connection, connectionState } = useSignalR();
   const [metrics, setMetrics] = useState<IMetrics | null>(null);
   const [history, setHistory] = useState<IMetrics[]>([]);
@@ -75,4 +75,4 @@ const MetricsPage = () => {
   );
 };
 
-export default MetricsPage;
+export default MetricsGrid;
