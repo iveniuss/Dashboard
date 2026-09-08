@@ -9,6 +9,7 @@ public class SystemMetricsCache
 {
     private volatile MetricsSnapshot? _lastSnapshot;
     private readonly List<MetricsSnapshot> _snapshots = new();
+    private readonly int _recordsToKeep = 20;
 
     public MetricsSnapshot? LastSnapshot
     {
@@ -21,5 +22,7 @@ public class SystemMetricsCache
     public void UpdateLongTimeCache(MetricsSnapshot snapshot)
     {
         _snapshots.Add(snapshot);
+        if (_snapshots.Count > _recordsToKeep)
+            _snapshots.RemoveAt(0);
     }
 }
