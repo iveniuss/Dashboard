@@ -1,4 +1,4 @@
-import { Box, type BoxProps, Text } from "@chakra-ui/react";
+import { type BoxProps, GridItem, Text } from "@chakra-ui/react";
 
 interface CardBoxProps extends BoxProps {
   cells?: [number, number];
@@ -12,7 +12,7 @@ export const WidgetBox = ({
   ...rest
 }: CardBoxProps) => {
   return (
-    <Box
+    <GridItem
       paddingX="1.5rem"
       paddingY="0.5rem"
       bg={"bg.card"}
@@ -20,10 +20,12 @@ export const WidgetBox = ({
       boxShadow="lg"
       w={cells ? `${cells[0] * 10 + (cells[0] - 1) * 2}rem` : ""}
       h={cells ? `${cells[1] * 10 + (cells[1] - 1) * 2}rem` : ""}
+      rowSpan={cells ? cells[1] : 1}
+      colSpan={cells ? cells[0] : 1}
       {...rest}
     >
       {title && <Text textStyle={"md"} fontWeight={"bold"}>{title}</Text>}
       {children}
-    </Box>
+    </GridItem>
   );
 };
