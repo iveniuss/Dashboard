@@ -12,7 +12,16 @@ export const MetricsPage = () => {
   const [isEdit, setIsEdit] = useState(false);
   return (
     <>
-      <MetricsGrid />
+      <MetricsGrid
+        widgets={[
+          "cpu-sm",
+          "memory-sm",
+          "memory-md",
+          "storage-sm",
+          "code",
+          "memory-chart",
+        ]}
+      />
       <Drawer.Root
         open={isEdit}
         onOpenChange={(e) => {
