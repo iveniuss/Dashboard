@@ -2,7 +2,7 @@ import { Chart, useChart } from "@chakra-ui/charts";
 import { useLocaleContext } from "@chakra-ui/react";
 import { Area, AreaChart, XAxis, YAxis } from "recharts";
 import type { IMetrics } from "@/shared/types";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 const GB = 1024 ** 3;
 
@@ -17,20 +17,17 @@ interface IChartData {
 }
 
 export const MemoryChart = ({ metricsHistory }: IProps) => {
-  const [data, setData] = useState<IChartData[]>([]);
   const { locale } = useLocaleContext();
 
-  useEffect(() => {
-    setData(
-      metricsHistory.map((snapshot) => {
-        return {
-          used: snapshot.mem.used,
-          usedWithCache: snapshot.mem.usedWithCache,
-          timestamp: snapshot.timestamp,
-        };
-      }),
-    );
-  }, [metricsHistory]);
+  const data = useMemo<IChartData[]>(
+    () =>
+      metricsHistory.map((snapshot) => ({
+        used: snapshot.mem.used,
+        usedWithCache: snapshot.mem.usedWithCache,
+        timestamp: snapshot.timestamp,
+      })),
+    [metricsHistory],
+  );
 
   const chart = useChart({
     data: data,
